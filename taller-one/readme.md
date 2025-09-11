@@ -15,7 +15,7 @@ Este proyecto implementa un sistema de procesamiento de imágenes para extraer y
 ## 🗂️ Estructura del Proyecto
 
 ```
-TALLER-ONE/
+taller-one/
 ├── imagenes/                    # Imágenes de ejemplo
 │   ├── ejemplo_circulos.jpg    # Círculos de diferentes colores
 │   ├── ejemplo_formas.jpg      # Formas geométricas variadas
@@ -42,8 +42,8 @@ TALLER-ONE/
 
 1. **Clonar o descargar el proyecto**
    ```bash
-   git clone [URL_DEL_REPOSITORIO]
-   cd TALLER-ONE
+   git clone https://github.com/AbelAlbuez/image-video-processing.git
+   cd image-video-processing/taller-one
    ```
 
 2. **Crear entorno virtual**
@@ -66,7 +66,17 @@ TALLER-ONE/
 ```bash
 python setup.py
 ```
-Este script creará el entorno virtual, instalará dependencias y generará imágenes de ejemplo automáticamente.
+Este script automático realiza las siguientes acciones:
+1. Crea el entorno virtual `venv_taller1`
+2. Instala todas las dependencias desde `requirements.txt`
+3. Crea la estructura de directorios (`imagenes/`, `informes/`, `resultados/`)
+4. Genera archivo `.gitignore`
+5. **Crea 2 imágenes de ejemplo automáticamente:**
+   - `imagen_taller1.jpg`: Bloques de 6 colores puros
+   - `imagenes/ejemplo_circulos.jpg`: Múltiples objetos de colores
+6. Verifica que la instalación sea correcta
+
+Una vez ejecutado el setup, puedes proceder directamente a ejecutar el programa principal.
 
 ## 📦 Dependencias
 
