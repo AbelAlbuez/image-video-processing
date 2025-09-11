@@ -27,3 +27,7 @@ Thumbs.db
 # Archivos temporales
 *.tmp
 *.temp
+
+# Resultados del procesamiento
+resultados/
+reporte_taller1.txt
