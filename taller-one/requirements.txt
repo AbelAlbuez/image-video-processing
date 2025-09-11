@@ -1,0 +1,25 @@
+# Dependencias para Taller 1 - Procesamiento de Imágenes y Video
+# Extracción de Objetos por Color
+
+# OpenCV para procesamiento de imágenes
+opencv-python==4.8.1.78
+
+# NumPy para operaciones con arrays
+numpy==1.24.3
+
+# Matplotlib para visualización
+matplotlib==3.7.2
+
+# Scikit-learn para clustering K-means
+scikit-learn==1.3.0
+
+# Dependencias opcionales pero recomendadas
+# Para mejor rendimiento en operaciones numéricas
+scipy==1.11.1
+
+# Para guardar resultados en diferentes formatos
+Pillow==10.0.0
+
+# Para generar reportes más elaborados (opcional)
+# pandas==2.0.3
+# seaborn==0.12.2
