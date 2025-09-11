@@ -177,25 +177,36 @@ pip install numpy --upgrade --force-reinstall
 
 ## 📈 Explicación del Algoritmo
 
-### 1. Identificación de colores (K-means)
+### 1. Procesamiento por lotes (NUEVO)
+- Detecta automáticamente todas las imágenes en `imagenes/`
+- Procesa cada imagen de forma independiente
+- Organiza resultados en carpetas separadas
+- Genera reportes individuales y consolidados
+
+### 2. Identificación de colores (K-means)
 - Reduce el tamaño de la imagen para eficiencia
-- Aplica K-means para encontrar los N colores dominantes
+- Aplica K-means para encontrar los 6 colores dominantes
 - Ordena por frecuencia de aparición
 
-### 2. Segmentación por color
+### 3. Segmentación por color
 - Convierte al espacio de color seleccionado (HSV recomendado)
 - Define rangos de tolerancia para cada color
 - Crea máscaras binarias usando `cv2.inRange()`
 
-### 3. Limpieza morfológica
+### 4. Limpieza morfológica
 - Apertura: elimina ruido pequeño
 - Cierre: rellena huecos en objetos
 - Filtrado por área mínima
 
-### 4. Extracción de objetos
+### 5. Extracción de objetos
 - Encuentra contornos usando `cv2.findContours()`
 - Calcula estadísticas (área, número de objetos)
 - Genera visualizaciones y reportes
+
+### 6. Guardado automático
+- Todas las visualizaciones se guardan como PNG (150 DPI)
+- Sin ventanas emergentes para mejor automatización
+- Nombres descriptivos para fácil identificación
 
 ## 📝 Estructura del Reporte
 
