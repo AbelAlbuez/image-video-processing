@@ -1,0 +1,13 @@
+REPORTE GENERAL - TALLER 1: EXTRACCIÓN DE OBJETOS POR COLOR
+======================================================================
+
+Fecha de procesamiento: 2025-09-11 17:04:08
+Total de imágenes procesadas: 2
+
+1. imagenes/ejemplo_formas.jpg
+   Archivos generados: 8
+2. imagenes/imagen_taller1.jpg
+   Archivos generados: 8
+
+======================================================================
+Procesamiento completado exitosamente

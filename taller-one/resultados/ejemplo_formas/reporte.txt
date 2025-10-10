@@ -1,0 +1,49 @@
+REPORTE - TALLER 1: EXTRACCIÓN DE OBJETOS POR COLOR
+==================================================
+
+Fecha: 2025-09-11 17:04:05
+Imagen: ejemplo_formas
+Dimensiones: 700x500 píxeles
+Colores procesados: 4
+
+COLOR_1
+--------------------
+Color RGB: (249, 249, 249)
+Objetos detectados: 1
+Área total: 271078 píxeles
+Porcentaje de imagen: 77.45%
+Área promedio por objeto: 340723.00 píxeles
+Área máxima: 340723.00 píxeles
+Área mínima: 340723.00 píxeles
+
+COLOR_2
+--------------------
+Color RGB: (242, 5, 5)
+Objetos detectados: 3
+Área total: 14985 píxeles
+Porcentaje de imagen: 4.28%
+Área promedio por objeto: 4848.00 píxeles
+Área máxima: 4850.00 píxeles
+Área mínima: 4847.00 píxeles
+
+COLOR_3
+--------------------
+Color RGB: (1, 1, 246)
+Objetos detectados: 2
+Área total: 10527 píxeles
+Porcentaje de imagen: 3.01%
+Área promedio por objeto: 5140.25 píxeles
+Área máxima: 5707.00 píxeles
+Área mínima: 4573.50 píxeles
+
+COLOR_4
+--------------------
+Color RGB: (83, 251, 8)
+Objetos detectados: 2
+Área total: 6661 píxeles
+Porcentaje de imagen: 1.90%
+Área promedio por objeto: 3192.75 píxeles
+Área máxima: 3524.50 píxeles
+Área mínima: 2861.00 píxeles
+
+TOTAL DE OBJETOS DETECTADOS: 8
