@@ -619,7 +619,7 @@ Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
 **Abel Albuez Sanchez** - [correo@javeriana.edu.co](mailto:correo@javeriana.edu.co)  
 **Daniel Felipe Rios Caro** - [correo@javeriana.edu.co](mailto:correo@javeriana.edu.co)
 
-**Link del Proyecto:** [https://github.com/tu-usuario/melanoma-segmentation](https://github.com/tu-usuario/melanoma-segmentation)
+**Link del Proyecto:** [Detección Temprana de Melanomas mediante Segmentación Adaptativa](https://github.com/AbelAlbuez/image-video-processing/tree/main/melanoma-segmentation-abcd)
 
 ---
 
