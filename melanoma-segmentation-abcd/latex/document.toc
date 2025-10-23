@@ -1,0 +1,10 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Introducción y Relevancia Médica}{3}{section.1}%
+\contentsline {section}{\numberline {2}Metodología y Desarrollo del Pipeline}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Desafíos del Enfoque Inicial: Umbralización por Color (HSV)}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Solución Robusta: Segmentación Adaptativa con Binarización de Otsu}{3}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Resultados y Análisis}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Análisis Visual y Cuantitativo de Ejemplos}{4}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Tabla de Descriptores Extraídos}{6}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Conclusión del Avance y Plan de Trabajo para la Segunda Entrega}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Objetivos de la Segunda Entrega}{6}{subsection.4.1}%

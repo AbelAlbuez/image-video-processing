@@ -1,0 +1,171 @@
+\documentclass[12pt, a4paper]{article}
+
+% PAQUETES BÁSICOS
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{float} % Para mejor control de la posición de las figuras con [H]
+
+% PAQUETES PARA MEJORAR LA APARIENCIA
+\usepackage{booktabs} % Para tablas de calidad profesional
+\usepackage{hyperref} % Para links y un look más moderno
+\usepackage{tabularx}      
+\usepackage{ragged2e}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+	pdftitle={Informe de Avances 1},
+	pdfpagemode=FullScreen,
+}
+
+% CONFIGURACIÓN DE LA PÁGINA
+\geometry{a4paper, margin=1in}
+
+% --- METADATOS DEL DOCUMENTO ---
+\title{\textbf{Informe de Avances 1: Segmentación Adaptativa de Lesiones Cutáneas para la Detección Temprana de Melanoma}}
+\author{Abel Albuez Sanchez \\ Daniel Felipe Rios Caro}
+\date{25 de septiembre de 2025}
+
+% --- INICIO DEL DOCUMENTO ---
+\begin{document}
+	
+	\maketitle
+	\thispagestyle{empty} % Para que la página del título no tenga número
+	%\newpage
+	
+	%\tableofcontents % Opcional: añade un índice al inicio
+	%\newpage
+	
+	\section{Introducción y Relevancia Médica}
+	
+	El melanoma, el tipo más letal de cáncer de piel, representa un desafío significativo en el campo de la dermatología debido a su alta tasa de mortalidad cuando no se detecta en sus etapas iniciales. La evidencia clínica es contundente: un diagnóstico temprano puede elevar la tasa de supervivencia del paciente por encima del 95\%. Sin embargo, la detección visual tradicional se enfrenta a obstáculos considerables, como la alta variabilidad en la morfología de las lesiones, la sutileza de los indicadores de malignidad y la subjetividad inherente a la inspección humana.
+	
+	Este proyecto aborda este desafío mediante el desarrollo de un sistema computacional de apoyo al diagnóstico. El objetivo es crear un pipeline robusto para la \textbf{segmentación automática} de lesiones pigmentadas en imágenes dermatoscópicas. Una segmentación precisa es el pilar fundamental para la posterior extracción cuantitativa y objetiva de características clínicas, como las definidas por la regla ABCD (Asimetría, Borde, Color, Diámetro), permitiendo así un análisis más fiable y reproducible.
+	
+	\section{Metodología y Desarrollo del Pipeline}
+	
+	El núcleo de este avance fue el desarrollo y la optimización de un pipeline de segmentación. Se exploraron dos enfoques para determinar la estrategia más efectiva y robusta.
+	
+	\subsection{Desafíos del Enfoque Inicial: Umbralización por Color (HSV)}
+	
+	El primer método implementado se basó en la segmentación por umbral de color en el espacio HSV. Teóricamente, este espacio es ideal porque desacopla el tono (Hue) de la saturación y el brillo, lo que debería hacerlo resistente a cambios de iluminación. Sin embargo, en la práctica, este método demostró ser frágil. La definición de un rango de color \textit{fijo} para todas las imágenes resultó ineficaz debido a la gran variabilidad de pigmentación entre lesiones y los diferentes tonos de piel de los pacientes. Esto condujo a segmentaciones inconsistentes, donde partes de la lesión eran omitidas o, peor aún, grandes áreas de piel sana eran incorrectamente clasificadas como lesión.
+	
+	\subsection{Solución Robusta: Segmentación Adaptativa con Binarización de Otsu}
+	
+	Para superar las limitaciones del primer enfoque, se adoptó un enfoque adaptativo, tal como se había propuesto en la metodología del proyecto, utilizando el \textbf{método de binarización de Otsu}. Este algoritmo no depende de valores predefinidos, sino que calcula el umbral óptimo para cada imagen de forma individual, maximizando la varianza entre las dos clases de píxeles (lesión y piel).
+	
+	El pipeline final implementado es el siguiente:
+	\begin{enumerate}
+		\item \textbf{Extracción del Canal Azul y Filtrado:} Se trabaja sobre el canal azul de la imagen RGB, ya que empíricamente ofrece el mayor contraste para las lesiones pigmentadas oscuras. A continuación, se aplica un filtro Gaussiano para suavizar la imagen, eliminando el ruido de alta frecuencia y garantizando que el algoritmo de Otsu pueda encontrar un umbral más estable y significativo.
+		\item \textbf{Binarización Adaptativa de Otsu:} El algoritmo de Otsu se aplica sobre la imagen suavizada en escala de grises. Este paso genera una máscara binaria inicial que, aunque mucho más precisa que el método HSV, aún puede contener imperfecciones.
+		\item \textbf{Refinamiento Morfológico:} Este es un paso crítico para la limpieza de la máscara. Se aplica una secuencia de \textbf{operaciones morfológicas}:
+		\begin{itemize}
+			\item \textbf{Apertura (Opening):} Se utiliza para eliminar el ruido de "sal y pimienta", es decir, pequeños grupos de píxeles blancos aislados en el fondo.
+			\item \textbf{Cierre (Closing):} Sirve para rellenar pequeños agujeros negros dentro del cuerpo principal de la lesión, creando una máscara sólida y cohesiva.
+		\end{itemize}
+	\end{enumerate}
+	Este enfoque adaptativo demostró ser extraordinariamente eficaz, produciendo segmentaciones consistentes y precisas en una amplia gama de imágenes.
+	
+	\section{Resultados y Análisis}
+	
+	El éxito del pipeline adaptativo se evidencia tanto en la calidad visual de la segmentación como en la coherencia de los datos cuantitativos extraídos.
+	
+	\subsection{Análisis Visual y Cuantitativo de Ejemplos}
+	
+	A continuación, se presentan los resultados para tres imágenes de prueba, mostrando la máscara de segmentación y los descriptores extraídos.
+	
+	% --- EJEMPLO 1 ---
+	\begin{figure}[H]
+		\centering
+		% REEMPLAZA 'ruta/a/la/imagen1.png' CON LA RUTA DE TU PRIMERA IMAGEN DE RESULTADO
+		\includegraphics[width=1\textwidth]{img/Figure\_1.png} 
+		\caption{Resultado de la segmentación para la imagen ISIC\_0024306.jpg.}
+		\label{fig:ejemplo1}
+	\end{figure}
+	
+	% --- EJEMPLO 2 ---
+	\begin{figure}[H]
+		\centering
+		% REEMPLAZA 'ruta/a/la/imagen2.png' CON LA RUTA DE TU SEGUNDA IMAGEN DE RESULTADO
+		\includegraphics[width=1\textwidth]{img/Figure\_2.png}
+		\caption{Resultado de la segmentación para la imagen ISIC\_0024307.jpg.}
+		\label{fig:ejemplo2}
+	\end{figure}
+	
+	% --- EJEMPLO 3 ---
+	\begin{figure}[H]
+		\centering
+		% REEMPLAZA 'ruta/a/la/imagen3.png' CON LA RUTA DE TU TERCERA IMAGEN DE RESULTADO
+		\includegraphics[width=1\textwidth]{img/Figure\_3.png}
+		\caption{Resultado de la segmentación para la imagen ISIC\_0024308.jpg.}
+		\label{fig:ejemplo3}
+	\end{figure}
+	
+	\clearpage % Fuerza a que la tabla aparezca en una nueva página si es necesario
+	
+	\subsection{Tabla de Descriptores Extraídos}
+	
+	Los datos cuantitativos extraídos de las máscaras refinadas se consolidan en la siguiente tabla.
+	
+	\begin{table}[H]
+		\centering
+		\caption{Resultados cuantitativos preliminares obtenidos con el método de Otsu.}
+		\label{tab:descriptores}
+		% Se cambia 'tabular' por 'tabularx' y se ajusta el ancho al del texto (\textwidth)
+		% La 'X' permite que las columnas se ajusten automáticamente. 
+		% >{\Centering}X centra el contenido de esas columnas.
+		\begin{tabularx}{\textwidth}{l *{4}{>{\Centering}X}}
+			\toprule
+			% Se pueden acortar un poco los encabezados para asegurar el ajuste
+			\textbf{Imagen} & \textbf{Área (px²)} & \textbf{Perímetro (px)} & \textbf{Circularidad} & \textbf{Diámetro (px)} \\
+			\midrule
+			ISIC\_0024306.jpg & 60623.00 & 1169.57 & 0.5569 & 340.13 \\
+			ISIC\_0024307.jpg & 56227.50 & 1353.98 & 0.3854 & 337.15 \\
+			ISIC\_0024308.jpg & 85032.00 & 1436.93 & 0.5175 & 535.73 \\
+			\bottomrule
+		\end{tabularx}
+	\end{table}
+	
+	\textbf{Interpretación de los Descriptores:}
+	\begin{itemize}
+		\item \textbf{Descriptor B (Borde):} Se ha cuantificado mediante el \textbf{Índice de Circularidad}. Un círculo perfecto tiene un valor de 1.0. Los valores obtenidos (entre 0.38 y 0.56) indican una desviación significativa de una forma circular, lo que sugiere bordes irregulares, una característica clave asociada a la malignidad.
+		\item \textbf{Descriptor D (Diámetro):} El diámetro estimado nos da una medida del tamaño de la lesión, otro factor importante en el diagnóstico clínico.
+	\end{itemize}
+	
+	\section{Conclusión del Avance y Plan de Trabajo para la Segunda Entrega}
+	
+	Este primer avance concluye con el desarrollo exitoso de un pipeline de segmentación adaptativa robusto y validado. Se ha demostrado su capacidad para aislar lesiones de manera precisa, sentando una base sólida para el análisis completo de características.
+	
+	El trabajo para la \textbf{segunda entrega} se centrará en la implementación de los descriptores restantes y en la evaluación formal del sistema. El plan de trabajo se estructura de la siguiente manera:
+	
+	\subsection{Objetivos de la Segunda Entrega}
+	
+	\begin{enumerate}
+		\item \textbf{Completar la Extracción de Descriptores ABCD:}
+		\begin{itemize}
+			\item \textbf{Descriptor A (Asimetría):} Se implementará un algoritmo que divida la máscara de la lesión por sus ejes principales (horizontal y vertical). Se calculará el grado de asimetría comparando el área de solapamiento entre las mitades opuestas. Una baja superposición indicará alta asimetría.
+			\item \textbf{Descriptor C (Color):} Utilizando la máscara como plantilla, se analizarán los píxeles de color dentro de la lesión en la imagen original. Se calculará la desviación estándar de los valores en los canales de color (e.g., en el espacio Lab) para cuantificar la variegación del color. La presencia de múltiples tonos (negro, marrón, rojo, azul) es un indicador de sospecha.
+		\end{itemize}
+		
+		\item \textbf{Evaluación Cuantitativa del Rendimiento de la Segmentación:}
+		\begin{itemize}
+			\item Se utilizará un subconjunto del dataset que cuente con máscaras de segmentación de referencia (\textit{ground truth}) proporcionadas por expertos.
+			\item Se calcularán dos métricas estándar en segmentación de imágenes médicas:
+			\begin{itemize}
+				\item \textbf{IoU (Intersection over Union):} Mide el grado de solapamiento entre la máscara predicha por nuestro sistema y la máscara real.
+				\item \textbf{Coeficiente de Dice:} Es una métrica similar al IoU, muy sensible al solapamiento de píxeles y ampliamente utilizada en la validación de segmentación médica.
+			\end{itemize}
+			\item El objetivo es alcanzar la meta de precisión definida en la propuesta del proyecto (IoU $\geq$ 0.6 en al menos el 70\% de las imágenes de prueba).
+		\end{itemize}
+		
+		\item \textbf{Elaboración del Informe Final y Preparación de la Demostración:}
+		\begin{itemize}
+			\item Se redactará un informe final consolidando toda la metodología, los resultados cuantitativos y cualitativos, y un análisis de los hallazgos.
+			\item Se preparará una demostración funcional que permita procesar una imagen dermatoscópica y visualizar en tiempo real la máscara de segmentación y los descriptores ABCD calculados.
+		\end{itemize}
+	\end{enumerate}
+	
+\end{document}
